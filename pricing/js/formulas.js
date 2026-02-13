@@ -1,3 +1,4 @@
+const adjusted = (price) => (Math.ceil(price * 4) / 4).toFixed(2);
 
 const formulas = {
   "draft_1/2_barrel": {
@@ -10,7 +11,7 @@ const formulas = {
       {price: 300, markup: .38},
       {price: DEFAULT_PRICE_HOLDER, markup: .45},
     ],
-    adjusted: (price) => (Math.ceil(price * 4) / 4).toFixed(2),
+    adjusted,
   },
   "draft_50L": {
     category: "Beer",
@@ -20,7 +21,7 @@ const formulas = {
     ranges: [
       {price: DEFAULT_PRICE_HOLDER, markup: .30},
     ],
-    adjusted: (price) => (Math.ceil(price * 4) / 4).toFixed(2),
+    adjusted,
   },
   "draft_1/4_barrel": {
     category: "Beer",
@@ -30,7 +31,7 @@ const formulas = {
     ranges: [
       {price: DEFAULT_PRICE_HOLDER, markup: .32}
     ],
-    adjusted: (price) => (Math.ceil(price * 4) / 4).toFixed(2),
+    adjusted,
   },
   "draft_1/6_barrel": {
     category: "Beer",
@@ -43,7 +44,7 @@ const formulas = {
       {price: 250, markup: .51},
       {price: DEFAULT_PRICE_HOLDER, markup: .55},
     ],
-    adjusted: (price) => (Math.ceil(price * 4) / 4).toFixed(2),
+    adjusted,
   },
   "pour_1/2_barrel": {
     category: "Beer",
@@ -55,7 +56,7 @@ const formulas = {
       {price: 400, markup: .22},
       {price: DEFAULT_PRICE_HOLDER, markup: .24},
     ],
-    adjusted: (price) => (Math.ceil(price * 4) / 4).toFixed(2),
+    adjusted,
   },
   "pour_50L": {
     category: "Beer",
@@ -65,7 +66,7 @@ const formulas = {
     ranges: [
       {price: DEFAULT_PRICE_HOLDER, markup: .20},
     ],
-    adjusted: (price) => (Math.ceil(price * 4) / 4).toFixed(2),
+    adjusted,
   },
   "pour_1/4_barrel": {
     category: "Beer",
@@ -75,7 +76,7 @@ const formulas = {
     ranges: [
       {price: DEFAULT_PRICE_HOLDER, markup: .23}
     ],
-    adjusted: (price) => (Math.ceil(price * 4) / 4).toFixed(2),
+    adjusted,
   },
   "pour_1/6_barrel": {
     description: "1/6 | 5.16 | 20 L",
@@ -89,7 +90,7 @@ const formulas = {
       {price: 250, markup: .32},
       {price: DEFAULT_PRICE_HOLDER, markup: .34},
     ],
-    adjusted: (price) => (Math.ceil(price * 4) / 4).toFixed(2),
+    adjusted,
   },
   "can": {
     category: "Beer",
@@ -109,7 +110,7 @@ const formulas = {
     ranges: [
       {price: DEFAULT_PRICE_HOLDER, markup: .45},
     ],
-    adjusted: (price) => (Math.ceil(price * 4) / 4).toFixed(2),
+    adjusted,
   },
   "pour_wine": {
     category: "Wine",
@@ -119,7 +120,7 @@ const formulas = {
     ranges: [
       {price: DEFAULT_PRICE_HOLDER, markup: .33},
     ],
-    adjusted: (price) => (Math.ceil(price * 4) / 4).toFixed(2),
+    adjusted,
   },
   "wine_bottle": {
     category: "Wine",
@@ -129,6 +130,6 @@ const formulas = {
     ranges: [
       {price: DEFAULT_PRICE_HOLDER, markup: .73}
     ],
-    adjusted: (price) => (Math.ceil(price * 4) / 4).toFixed(2),
+    adjusted,
   }
 }
