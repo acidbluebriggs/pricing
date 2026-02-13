@@ -1,5 +1,5 @@
 #!/bin/bash
-# update_cache.sh
+# bust_that_cache.sh
 TIMESTAMP=$(date +%s)
 sed -i '' "s/css\/style\.css?v=[0-9]*/css\/style.css?v=$TIMESTAMP/g" pricing/index.html
 sed -i '' "s/js\/app\.js?v=[0-9]*/js\/app.js?v=$TIMESTAMP/g" pricing/index.html
