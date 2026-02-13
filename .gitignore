@@ -1,0 +1,7 @@
+/tmp
+.idea/
+*.iml
+**/config.json
+**/*.out
+*.gob
+trie

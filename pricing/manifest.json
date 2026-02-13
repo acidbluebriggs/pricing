@@ -1,0 +1,16 @@
+{
+  "name": "Acidblue Beer Market Pricing Calculator",
+  "short_name": "Pricing Calc",
+  "description": "Calculate pricing for beer and wine products",
+  "start_url": "/pricing",
+  "display": "standalone",
+  "background_color": "#b3d4fc",
+  "theme_color": "#0D69B6",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

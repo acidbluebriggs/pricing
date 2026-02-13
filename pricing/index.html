@@ -1,0 +1,146 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <title>Acidblue Pricing Calculator</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <meta name="description" content="Acidblue Pricing Calculator">
+  <meta name="theme-color" content="#0D69B6">
+  <link rel="stylesheet" href="css/style.css?v=1771002745">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-icon.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-icon.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-icon.png">
+  <link rel="manifest" href="manifest.json">
+
+  <script>
+    if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+      navigator.serviceWorker.register('sw.js?v=1771002745')
+        .then(reg => console.log('✅ SW registered:', reg.scope))
+        .catch(err => console.error('❌ SW registration failed:', err));
+    } else {
+      console.log('SW not supported or file:// protocol');
+    }
+  </script>
+
+</head>
+<body>
+
+<h2>
+  <img src="img/mini-logo.png" height="30" width="35" alt="Acidblue">
+  <span class="header-title">
+    Pricing Calculator <span class="version">v1.3.0</span>
+  </span>
+  <span onclick="showPricingSchedule()" class="settings-btn">?</span>
+</h2>
+
+<div class="section">
+  <label class="label" for="priceInput">Invoice Price</label>
+  <div class="priceInput">
+  <input
+    type="number"
+    id="priceInput"
+    class="full-width-input"
+    placeholder="e.g. 200.00"
+    step="0.01"
+    inputmode="decimal"
+    oninput="formatPriceInput(this); update()"
+  />
+  <button onclick="resetInvoicePrice()" class="resetBtn" style="font-size: 1.5em">✕</button>
+  </div>
+</div>
+
+<div class="section">
+  <label class="label">Source</label>
+  <div class="toggle-group">
+    <input type="radio" name="sourceType" id="beerKegs" value="beerKegs" onclick="showOptions()" hidden>
+    <label for="beerKegs"><img src="img/beer_keg.png" style="height: 40px; width: auto;" alt="beer keg"/></label>
+
+    <input type="radio" name="sourceType" id="beerCans" value="beerCans" onclick="showOptions()" hidden>
+    <label for="beerCans"><img src="img/can.png" style="height: 40px; width: auto;" alt="beer can"></label>
+
+    <input type="radio" name="sourceType" id="wineBottles" value="wineBottles" onclick="showOptions()" hidden>
+    <label for="wineBottles"><img src="img/wine.png" style="height: 40px; width: auto;" alt="wine bottle"></label>
+
+    <input type="radio" name="sourceType" id="wineKegs" value="wineKegs" onclick="showOptions()" hidden>
+    <label for="wineKegs"><img src="img/cask.png" style="height: 40px; width: auto;" alt="wine cask">️</label>
+  </div>
+</div>
+
+<div id="beerKegOptions" class="section" style="display: none;">
+  <label class="label">Keg Size</label>
+  <div class="toggle-group">
+    <input type="radio" name="kegSize" id="halfBarrel" value="1/2_barrel" onclick="update()" hidden>
+    <label for="halfBarrel" title="1/2 Barrel">1/2</label>
+
+    <input type="radio" name="kegSize" id="fiftyL" value="50L" onclick="update()" hidden>
+    <label for="fiftyL" title="30 Liters">50L</label>
+
+    <input type="radio" name="kegSize" id="quarterBarrel" value="1/4_barrel" onclick="update()" hidden>
+    <label for="quarterBarrel" title="1/4 Barrel">1/4</label>
+
+    <input type="radio" name="kegSize" id="sixthBarrel" value="1/6_barrel" onclick="update()" hidden>
+    <label for="sixthBarrel" title="1/6 Barrel">1/6</label>
+  </div>
+</div>
+
+<div id="beerCanOptions" class="section" style="display: none;">
+  <label class="label">Number of Cans:</label>
+  <div class="toggle-group">
+    <input type="radio" name="canCount" id="can6" value="6" onclick="toggleCanCountInput(this);update()" hidden>
+    <label for="can6" title="6 Cans">6</label>
+
+    <input type="radio" name="canCount" id="can12" value="12" onclick="toggleCanCountInput(this); update()"  hidden>
+    <label for="can12" title="12 Cans">12</label>
+
+    <input type="radio" name="canCount" id="can24" value="24" onclick="toggleCanCountInput(this); update()" hidden>
+    <label for="can24" title="24 Cans">24</label>
+
+    <input type="radio" name="canCount" id="canOther" value="other" onclick="toggleCanCountInput(this); update()" hidden>
+    <label for="canOther" title="Other Count">Other</label>
+  </div>
+  <br />
+  <div class="priceInput">
+    <input
+      type="number"
+      inputmode="numeric"
+      style="display: none" type="number" class="full-width-input" id="customCanCount" oninput="update()" placeholder="e.g. 1" />
+    <label for="customCanCount"></label>
+    <button onclick="resetBeerCanCount()" id="beerCanResetButton" class="resetBtn" style="font-size: 1.5em">✕</button>
+  </div>
+</div>
+
+<div id="wineBottleOptions" class="section" style="display: none;">
+  <label class="label" for="wineBottleCount">Number of Bottles:</label>
+  <div class="priceInput">
+    <input
+      inputmode="numeric"
+      class="full-width-input"
+      type="number"
+      id="wineBottleCount"
+      oninput="update()"
+      value="1"
+      placeholder="e.g. 1" />
+    <button onclick="resetWineBottleCount()" class="resetBtn" style="font-size: 1.5em">✕</button>
+  </div>
+</div>
+
+<div id="actionButtons">
+  <button id="resetBtn" class="resetBtn" onclick="resetForm()">Reset</button>
+</div>
+
+<div id="settingsModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <div id="settingsTable"></div>
+    <button onclick="hidePricingSchedule()">Close</button>
+  </div>
+</div>
+
+<div id="result"></div>
+<script src="js/app.js?v=1771002745"></script>
+<script src="js/formulas.js?v=1771002745"></script>
+</body>
+
+</html>
